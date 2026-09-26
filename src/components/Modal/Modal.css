@@ -1,0 +1,20 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  overflow-y: auto;
+  background: rgb(0 0 0 / 0.55);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+}
+
+.modal__panel {
+  width: min(100%, 460px);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--glass-highlight), rgb(14 14 17 / 0.88);
+  box-shadow: var(--shadow-lift);
+}

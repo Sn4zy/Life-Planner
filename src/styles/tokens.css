@@ -1,0 +1,77 @@
+:root {
+  color-scheme: dark;
+
+  /* Color */
+  --color-bg: #050506;
+  --color-bg-raised: #0b0b0d;
+  --color-text: #f4f4f5;
+  --color-text-muted: rgb(255 255 255 / 0.64);
+  --color-text-subtle: rgb(255 255 255 / 0.42);
+  --color-accent: #ffffff;
+  --color-accent-contrast: #050506;
+  --color-border: rgb(255 255 255 / 0.1);
+  --color-border-strong: rgb(255 255 255 / 0.24);
+  --color-focus: rgb(255 255 255 / 0.85);
+
+  /* Glass */
+  --glass-bg: rgb(255 255 255 / 0.04);
+  --glass-bg-hover: rgb(255 255 255 / 0.07);
+  --glass-border: rgb(255 255 255 / 0.1);
+  --glass-border-hover: rgb(255 255 255 / 0.24);
+  --glass-highlight: linear-gradient(
+    145deg,
+    rgb(255 255 255 / 0.09) 0%,
+    rgb(255 255 255 / 0.02) 40%,
+    transparent 70%
+  );
+  --glass-saturate: 140%;
+
+  /* Blur */
+  --blur-sm: 8px;
+  --blur-md: 18px;
+  --blur-lg: 32px;
+  --blur-glass: var(--blur-md);
+
+  /* Radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  /* Percentage radii only stay circular on square elements (e.g. day cards). */
+  --radius-square: 10%;
+  --radius-full: 9999px;
+
+  /* Shadow */
+  --shadow-soft:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 8px 24px rgb(0 0 0 / 0.45);
+  --shadow-lift:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    0 24px 60px rgb(0 0 0 / 0.65),
+    0 2px 8px rgb(0 0 0 / 0.5);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Type */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 450ms;
+
+  /* Layout */
+  --content-max-width: 1200px;
+  --page-gutter: var(--space-4);
+}

@@ -1,0 +1,20 @@
+.page-fallback {
+  display: grid;
+  place-items: center;
+  min-height: 40vh;
+}
+
+.page-fallback__spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: var(--radius-full);
+  animation: page-fallback-spin 0.8s linear infinite;
+}
+
+@keyframes page-fallback-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
