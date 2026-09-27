@@ -1,6 +1,6 @@
 import { useId, useState } from 'react'
 import { MAX_ENTRIES_PER_DAY, PALETTE } from './scheduleConstants.js'
-import { createId, toMinutes } from './scheduleUtils.js'
+import { createId, crossesMidnight, formatDuration, getDurationMinutes } from './scheduleUtils.js'
 import './ScheduleEntryForm.css'
 
 function blankEntry(takenColors = []) {
@@ -13,8 +13,8 @@ function validate(rows) {
   for (const row of rows) {
     if (!row.label) {
       errors[row.id] = 'Give this entry a label.'
-    } else if (row.start && row.end && toMinutes(row.end) <= toMinutes(row.start)) {
-      errors[row.id] = 'End time must be after the start time.'
+    } else if (row.start && row.end && row.start === row.end) {
+      errors[row.id] = 'Start and end times can’t be the same.'
     }
   }
   return errors
@@ -151,6 +151,12 @@ export default function ScheduleEntryForm({
                 />
               </label>
             </div>
+
+            {crossesMidnight(row) && (
+              <p className="entry-form__hint">
+                Ends the next day · {formatDuration(getDurationMinutes(row))}
+              </p>
+            )}
 
             {error && (
               <p id={`${fieldId}-error`} className="entry-form__error" role="alert">

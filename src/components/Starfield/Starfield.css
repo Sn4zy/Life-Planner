@@ -1,0 +1,25 @@
+.starfield {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* The element itself is an invisible dot; every star is one of its box-shadows. */
+.starfield__layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.starfield__layer::after {
+  content: '';
+  position: absolute;
+  top: var(--starfield-height);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  box-shadow: inherit;
+}

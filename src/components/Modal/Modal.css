@@ -6,15 +6,22 @@
   place-items: center;
   padding: var(--space-4);
   overflow-y: auto;
-  background: rgb(0 0 0 / 0.55);
+  background: var(--color-scrim);
   backdrop-filter: blur(var(--blur-sm));
   -webkit-backdrop-filter: blur(var(--blur-sm));
 }
 
-.modal__panel {
+.modal__panel-motion {
   width: min(100%, 460px);
+}
+
+.modal__editable {
+  border-radius: var(--radius-xl);
+}
+
+.modal__panel {
   padding: var(--space-5);
   border-radius: var(--radius-xl);
-  background: var(--glass-highlight), rgb(14 14 17 / 0.88);
+  background: var(--glass-highlight), var(--color-panel);
   box-shadow: var(--shadow-lift);
 }

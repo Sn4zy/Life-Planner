@@ -1,4 +1,7 @@
 import { useCallback, useId, useMemo, useState } from 'react'
+import EditableBox from '../../components/EditableBox/EditableBox.jsx'
+import EditableSurface from '../../components/EditableBox/EditableSurface.jsx'
+import EditableText from '../../components/EditableBox/EditableText.jsx'
 import Modal from '../../components/Modal/Modal.jsx'
 import DayCard from './DayCard.jsx'
 import ScheduleEntryForm from './ScheduleEntryForm.jsx'
@@ -155,29 +158,37 @@ export default function Schedule() {
         </div>
       </div>
 
-      <aside className="schedule-legend glass" aria-label="Legend">
-        <span className="eyebrow">Legend</span>
-        {legend.length ? (
-          <ul className="schedule-legend__list">
-            {legend.map((item) => (
-              <li key={item.key} className="schedule-legend__item">
-                <span
-                  className="schedule-legend__dot"
-                  style={{ '--entry-color': getColorValue(item.color) }}
-                  aria-hidden="true"
-                />
-                {item.label}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="schedule-legend__empty">
-            Nothing scheduled this week. Click a weekday to set a recurring entry, or a date to plan just that day.
-          </p>
-        )}
-      </aside>
+      <EditableBox id="schedule.legend" label="Legend" className="schedule-legend-box">
+        <EditableSurface as="aside" className="schedule-legend glass" aria-label="Legend">
+          <EditableText id="schedule.legend.title" className="eyebrow">Legend</EditableText>
+          {legend.length ? (
+            <ul className="schedule-legend__list">
+              {legend.map((item) => (
+                <li key={item.key} className="schedule-legend__item">
+                  <span
+                    className="schedule-legend__dot"
+                    style={{ '--entry-color': getColorValue(item.color) }}
+                    aria-hidden="true"
+                  />
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="schedule-legend__empty">
+              Nothing scheduled this week. Click a weekday to set a recurring entry, or a date to plan just that day.
+            </p>
+          )}
+        </EditableSurface>
+      </EditableBox>
 
-      <Modal open={form !== null} onClose={closeEditor} labelledBy={formTitleId}>
+      <Modal
+        open={form !== null}
+        onClose={closeEditor}
+        labelledBy={formTitleId}
+        editableId="schedule.form"
+        editableLabel="Schedule form"
+      >
         {form}
       </Modal>
     </section>

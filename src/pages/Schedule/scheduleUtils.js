@@ -84,14 +84,30 @@ export function sortEntries(entries) {
   })
 }
 
+const MINUTES_PER_DAY = 24 * 60
+
 const isFullyTimed = (entry) => Boolean(entry.start && entry.end)
+
+export function crossesMidnight(entry) {
+  return isFullyTimed(entry) && toMinutes(entry.end) < toMinutes(entry.start)
+}
+
+// Minutes after the entry's own day starts; overnight entries end past 24:00.
+function endMinutes(entry) {
+  const end = toMinutes(entry.end)
+  return crossesMidnight(entry) ? end + MINUTES_PER_DAY : end
+}
+
+export function getDurationMinutes(entry) {
+  return endMinutes(entry) - toMinutes(entry.start)
+}
 
 // Expects entries already sorted by start time.
 export function getGapMinutes(sortedEntries) {
   if (sortedEntries.length < 2) return null
   const [first, second] = sortedEntries
   if (!isFullyTimed(first) || !isFullyTimed(second)) return null
-  return toMinutes(second.start) - toMinutes(first.end)
+  return toMinutes(second.start) - endMinutes(first)
 }
 
 export function formatGap(gapMinutes) {

@@ -1,0 +1,108 @@
+.notebook {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.notebook__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.notebook__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.notebook__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.notebook__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-subtle);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.notebook__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: rgb(var(--ink-rgb) / 0.5);
+  transition: background-color var(--duration-base) var(--ease-out);
+}
+
+.notebook__status--pending .notebook__status-dot {
+  background: var(--color-accent);
+  animation: notebook-pulse 1s ease-in-out infinite;
+}
+
+.notebook__status--error {
+  color: #ff8a8a;
+}
+
+.notebook__status--error .notebook__status-dot {
+  background: #ff8a8a;
+}
+
+@keyframes notebook-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.notebook__editable,
+.notebook__panel {
+  border-radius: var(--radius-xl);
+}
+
+.notebook__panel {
+  display: flex;
+}
+
+.editable-box--sized .notebook__textarea {
+  min-height: 0;
+  resize: none;
+}
+
+.notebook__textarea {
+  flex: 1;
+  min-height: max(420px, calc(100vh - 320px));
+  padding: var(--space-6);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  resize: vertical;
+}
+
+.notebook__textarea::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.notebook__textarea:focus {
+  outline: none;
+}
+
+.notebook__panel:has(.notebook__textarea:focus-visible) {
+  border-color: var(--glass-border-hover);
+}
+
+@media (max-width: 640px) {
+  .notebook__textarea {
+    padding: var(--space-5);
+  }
+}

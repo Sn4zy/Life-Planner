@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
+import EditableBox from '../EditableBox/EditableBox.jsx'
+import EditableSurface from '../EditableBox/EditableSurface.jsx'
 import './Modal.css'
 
 const panelMotion = {
@@ -10,7 +12,7 @@ const panelMotion = {
   transition: { type: 'spring', stiffness: 380, damping: 30 },
 }
 
-export default function Modal({ open, onClose, labelledBy, children }) {
+export default function Modal({ open, onClose, labelledBy, editableId, editableLabel, children }) {
   useEffect(() => {
     if (!open) return undefined
 
@@ -26,6 +28,8 @@ export default function Modal({ open, onClose, labelledBy, children }) {
     }
   }, [open, onClose])
 
+  const panel = <EditableSurface className="modal__panel glass">{children}</EditableSurface>
+
   return createPortal(
     <AnimatePresence>
       {open && (
@@ -39,13 +43,19 @@ export default function Modal({ open, onClose, labelledBy, children }) {
           }}
         >
           <motion.div
-            className="modal__panel glass"
+            className="modal__panel-motion"
             role="dialog"
             aria-modal="true"
             aria-labelledby={labelledBy}
             {...panelMotion}
           >
-            {children}
+            {editableId ? (
+              <EditableBox id={editableId} label={editableLabel} className="modal__editable" passThrough>
+                {panel}
+              </EditableBox>
+            ) : (
+              panel
+            )}
           </motion.div>
         </motion.div>
       )}

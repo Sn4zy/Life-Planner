@@ -1,0 +1,227 @@
+.bookmark-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bookmark-form__title {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.bookmark-form__image-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.bookmark-form__dropzone {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: rgb(var(--shade-rgb) / 0.3);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.bookmark-form__dropzone > * {
+  pointer-events: none;
+}
+
+.bookmark-form__dropzone:hover,
+.bookmark-form__dropzone--dragging {
+  border-color: var(--color-accent);
+  background-color: var(--glass-bg-hover);
+}
+
+.bookmark-form__dropzone:has(input:focus-visible) {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.bookmark-form__preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bookmark-form__dropzone-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.bookmark-form__dropzone-text strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.bookmark-form__image-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  color: var(--color-text-subtle);
+  font-size: 0.8rem;
+}
+
+.bookmark-form__text-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.bookmark-form__text-btn:hover {
+  color: var(--color-text);
+}
+
+.bookmark-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.bookmark-form__field > label {
+  padding-left: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.bookmark-form__field > label span {
+  color: var(--color-text-subtle);
+}
+
+.bookmark-form__input {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: rgb(var(--shade-rgb) / 0.35);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.95rem;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.bookmark-form__textarea {
+  min-height: 84px;
+  border-radius: var(--radius-lg);
+  resize: vertical;
+}
+
+.bookmark-form__select-wrap {
+  position: relative;
+}
+
+.bookmark-form__select-wrap::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--color-text-muted);
+  border-bottom: 1.5px solid var(--color-text-muted);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+.bookmark-form__select {
+  padding-right: 42px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.bookmark-form__select option {
+  background: var(--color-bg-raised);
+  color: var(--color-text);
+}
+
+.bookmark-form__input::placeholder {
+  color: var(--color-text-subtle);
+}
+
+.bookmark-form__input:focus {
+  border-color: var(--color-border-strong);
+}
+
+.bookmark-form__input[aria-invalid='true'] {
+  border-color: #ff8a8a;
+}
+
+.bookmark-form__error {
+  padding-left: var(--space-2);
+  color: #ff8a8a;
+  font-size: 0.8rem;
+}
+
+.bookmark-form__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.bookmark-form__actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.bookmark-form__btn {
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.bookmark-form__btn:hover:not(:disabled) {
+  background-color: var(--glass-bg-hover);
+}
+
+.bookmark-form__btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.bookmark-form__btn--primary {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.bookmark-form__btn--primary:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+}
+
+.bookmark-form__btn--danger {
+  border-color: rgb(255 138 138 / 0.4);
+  color: #ff8a8a;
+}
+
+.bookmark-form__btn--armed,
+.bookmark-form__btn--danger:hover:not(:disabled) {
+  border-color: #ff8a8a;
+  background-color: rgb(255 138 138 / 0.12);
+}

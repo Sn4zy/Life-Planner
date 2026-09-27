@@ -84,6 +84,7 @@ export default function Home() {
         {TILES.map((tile, index) => (
           <HomeTile
             key={tile.id}
+            editableId={`home.tile.${tile.id}`}
             index={index}
             to={tile.to}
             title={tile.title}

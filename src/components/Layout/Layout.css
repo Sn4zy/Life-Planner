@@ -11,24 +11,42 @@
   position: fixed;
   inset: 0;
   z-index: -1;
+  overflow: hidden;
   pointer-events: none;
   background:
-    radial-gradient(60vmax 40vmax at 12% 8%, rgb(255 255 255 / 0.09), transparent 60%),
-    radial-gradient(45vmax 45vmax at 88% 28%, rgb(255 255 255 / 0.05), transparent 60%),
-    radial-gradient(70vmax 45vmax at 50% 115%, rgb(255 255 255 / 0.07), transparent 60%),
+    radial-gradient(60vmax 40vmax at 12% 8%, rgb(var(--ink-rgb) / 0.09), transparent 60%),
+    radial-gradient(45vmax 45vmax at 88% 28%, rgb(var(--ink-rgb) / 0.05), transparent 60%),
+    radial-gradient(70vmax 45vmax at 50% 115%, rgb(var(--ink-rgb) / 0.07), transparent 60%),
     var(--color-bg);
 }
 
-.app-shell__header {
+/* The backdrop is fixed; its box must not become a stacking context or it would paint over the page. */
+.editable-box.app-shell__backdrop-box,
+.editable-box.app-shell__backdrop-box > .editable-box__frame {
+  position: static;
+  height: auto;
+  z-index: auto;
+}
+
+.app-shell__backdrop.edit-surface--selected {
+  outline-offset: -6px;
+}
+
+.editable-box.app-shell__header-box {
   position: sticky;
   top: var(--space-4);
   z-index: 10;
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--content-max-width));
+  height: auto;
+  margin: var(--space-4) auto 0;
+  border-radius: var(--radius-full);
+}
+
+.app-shell__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-  width: min(calc(100% - 2 * var(--page-gutter)), var(--content-max-width));
-  margin: var(--space-4) auto 0;
   padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
   border-radius: var(--radius-full);
 }
@@ -78,6 +96,43 @@
   border-color: var(--color-accent);
 }
 
+.app-shell__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.app-shell__edit-toggle {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    color var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+
+.app-shell__edit-toggle:hover {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.app-shell__edit-toggle[aria-pressed='true'] {
+  border-style: solid;
+  border-color: var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
 .app-shell__main {
   width: min(calc(100% - 2 * var(--page-gutter)), var(--content-max-width));
   margin: 0 auto;
@@ -85,14 +140,23 @@
 }
 
 @media (max-width: 720px) {
+  .editable-box.app-shell__header-box {
+    border-radius: var(--radius-lg);
+  }
+
   .app-shell__header {
     flex-wrap: wrap;
     border-radius: var(--radius-lg);
     padding: var(--space-3) var(--space-4);
   }
 
-  .app-shell__header nav {
+  .app-shell__actions {
     width: 100%;
+  }
+
+  .app-shell__header nav {
+    flex: 1;
+    min-width: 0;
     overflow-x: auto;
   }
 

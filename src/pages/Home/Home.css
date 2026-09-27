@@ -29,6 +29,22 @@
   min-width: 0;
 }
 
+.home__cell:has(.editable-box--raised) {
+  z-index: 1;
+}
+
+.home__cell:has(.editable-box--selected) {
+  z-index: 2;
+}
+
+.home__cell:has(.editable-box--active) {
+  z-index: 3;
+}
+
+.home__editable {
+  border-radius: var(--radius-xl);
+}
+
 .home__cell--large {
   grid-column: span 2;
   grid-row: span 2;
@@ -81,6 +97,41 @@
   opacity: 1;
 }
 
+/* Background image comes from the edit-mode override; the fade is layered over it in the same pseudo-element. */
+.home-tile.edit-surface--has-image::before {
+  background:
+    var(--image-fade),
+    var(--surface-bg-image) center / cover no-repeat,
+    var(--surface-bg-color, transparent);
+}
+
+.home-tile.edit-surface--has-image .home-tile__text,
+.home-tile.edit-surface--has-image .home-tile__index {
+  text-shadow: 0 1px 14px rgb(0 0 0 / 0.85);
+}
+
+/* Content on the always-dark image fade stays light in both themes. */
+.home-tile.edit-surface--has-image {
+  --color-text: var(--on-image-text);
+  --color-text-muted: var(--on-image-text-muted);
+  --color-text-subtle: var(--on-image-text-subtle);
+  --color-border: var(--on-image-border);
+  --color-border-strong: var(--on-image-border-strong);
+  color: var(--color-text);
+}
+
+.home-tile.edit-surface--has-image .home-tile__arrow {
+  --color-accent: var(--on-image-text);
+  --color-accent-contrast: #050506;
+}
+
+.home-tile.edit-surface--has-image .home-tile__icon,
+.home-tile.edit-surface--has-image .home-tile__arrow {
+  background-color: rgb(0 0 0 / 0.45);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+}
+
 .home-tile__top,
 .home-tile__bottom {
   display: flex;
@@ -103,7 +154,7 @@
   height: 48px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
-  background: rgb(255 255 255 / 0.05);
+  background: rgb(var(--ink-rgb) / 0.05);
 }
 
 .home-tile__index {
